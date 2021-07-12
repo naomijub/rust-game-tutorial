@@ -1,8 +1,19 @@
 use macroquad::prelude::*;
 
-#[macroquad::main("Tank Battle Ground")]
+fn window_conf() -> Conf {
+    Conf {
+        window_title: "Tank Battle Ground".to_owned(),
+        fullscreen: true,
+        ..Default::default()
+    }
+}
+
+#[macroquad::main(window_conf)]
 async fn main() {
-    let mut tank = TankBase::new(screen_width(), screen_height()).await;
+    let screen_width = screen_width();
+    let screen_height = screen_height();
+    let mut tank = Tank::new(screen_width, screen_height).await;
+
     loop {
         clear_background(BEIGE);
 
@@ -13,14 +24,14 @@ async fn main() {
     }
 }
 
-pub struct TankBase {
+pub struct Tank {
     pub(crate) position: Vec2,
     direction: Vec2,
     rotation: f32,
-    texture: Texture2D,
+    base_texture: Texture2D,
 }
 
-impl TankBase {
+impl Tank {
     async fn new(width: f32, height: f32) -> Self {
         let tank_base: Texture2D = load_texture("../assets/TankBase.png")
             .await
@@ -32,13 +43,13 @@ impl TankBase {
             )),
             direction: Vec2::from((-1., 0.)),
             rotation: 0.,
-            texture: tank_base,
+            base_texture: tank_base,
         }
     }
 
     fn draw(&self) {
         draw_texture_ex(
-            self.texture,
+            self.base_texture,
             self.position.x,
             self.position.y,
             WHITE,
