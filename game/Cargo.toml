@@ -8,3 +8,6 @@ edition = "2018"
 
 [dependencies]
 macroquad = "0.3"
+
+[dev-dependencies]
+tokio = {version = "*", features = ["full"]}
