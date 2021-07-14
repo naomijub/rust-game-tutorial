@@ -3,7 +3,7 @@ use macroquad::prelude::*;
 fn window_conf() -> Conf {
     Conf {
         window_title: "Tank Battle Ground".to_owned(),
-        fullscreen: true,
+        // fullscreen: true,
         ..Default::default()
     }
 }
@@ -63,6 +63,10 @@ impl Tank {
     }
 
     fn draw(&self) {
+        let mouse_position = mouse_position_local();
+
+        let angle = Vec2::from((-self.position.x, self.position.y)).angle_between(mouse_position);
+
         draw_texture_ex(
             self.base_texture,
             self.position.x,
@@ -86,7 +90,7 @@ impl Tank {
             DrawTextureParams {
                 dest_size: None,
                 source: None,
-                rotation: self.rotation,
+                rotation: angle,
                 flip_x: false,
                 flip_y: false,
                 pivot: None,
