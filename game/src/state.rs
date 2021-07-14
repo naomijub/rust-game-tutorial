@@ -8,18 +8,29 @@ use ggez::Context;
 
 use crate::objects::Tank;
 
+pub enum Player {
+    P1,
+    P2,
+    P3,
+    P4,
+}
+
 pub struct MainState {
     tank: Tank,
 }
 
 impl MainState {
-    pub fn new(ctx: &mut Context) -> ggez::GameResult<MainState> {
+    pub fn new(ctx: &mut Context, player: Player) -> ggez::GameResult<MainState> {
         let sc = screen_coordinates(ctx);
         let tank = Tank {
             position: na::Point2::from([sc.w / 2., sc.h / 2.]),
             tank_direction: na::Vector2::from([-1., 0.]),
             tank_rotation: 0.,
             texture: Some(graphics::Image::new(ctx, "/TankBase.png")?),
+            turret_texture: Some(graphics::Image::new(ctx, "/TankTops.png")?),
+            turret_direction: na::Vector2::from([-1., 0.]),
+            turret_rotation: 0.,
+            player,
         };
         let s = MainState { tank };
         Ok(s)

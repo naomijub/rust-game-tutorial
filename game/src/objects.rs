@@ -3,15 +3,21 @@ use std::collections::HashSet;
 use ggez;
 use ggez::event;
 use ggez::event::KeyCode;
-use ggez::graphics::{self};
+use ggez::graphics::{self, Rect};
 use ggez::nalgebra::{self as na, Point2};
 use ggez::timer::delta;
+
+use crate::state::Player;
 
 pub struct Tank {
     pub(crate) position: na::Point2<f32>,
     pub(crate) tank_direction: na::Vector2<f32>,
     pub(crate) tank_rotation: f32,
     pub(crate) texture: Option<graphics::Image>,
+    pub(crate) turret_texture: Option<graphics::Image>,
+    pub(crate) turret_direction: na::Vector2<f32>,
+    pub(crate) turret_rotation: f32,
+    pub(crate) player: Player,
 }
 
 impl event::EventHandler for Tank {
@@ -24,12 +30,19 @@ impl event::EventHandler for Tank {
     }
 
     fn draw(&mut self, ctx: &mut ggez::Context) -> ggez::GameResult {
-        let param = graphics::DrawParam::new()
+        println!("{:?}", self.get_player_turret());
+        let base_param = graphics::DrawParam::new()
             .dest(self.position)
             .offset(na::Point2::from([0.5, 0.5]))
             .rotation(self.tank_rotation);
+        let turret_param = graphics::DrawParam::new()
+            .dest(self.position)
+            .offset(na::Point2::from([0.5, 0.5]))
+            .src(self.get_player_turret())
+            .rotation(self.tank_rotation);
 
-        graphics::draw(ctx, self.texture.as_ref().unwrap(), param)?;
+        graphics::draw(ctx, self.texture.as_ref().unwrap(), base_param)?;
+        graphics::draw(ctx, self.turret_texture.as_ref().unwrap(), turret_param)?;
         Ok(())
     }
 }
@@ -66,6 +79,38 @@ impl Tank {
     fn update_direction(&mut self) {
         let (sin, cos) = self.tank_rotation.sin_cos();
         self.tank_direction = na::Vector2::from([-cos, -sin]);
+    }
+
+    fn get_player_turret(&self) -> Rect {
+        let draw_height = 0.5;
+        let draw_width = 0.5;
+
+        match self.player {
+            Player::P1 => Rect {
+                x: 0.,
+                y: 0.,
+                h: draw_height,
+                w: draw_width,
+            },
+            Player::P2 => Rect {
+                x: draw_width,
+                y: 0.,
+                h: draw_height,
+                w: draw_width,
+            },
+            Player::P3 => Rect {
+                x: 0.,
+                y: draw_height,
+                h: draw_height,
+                w: draw_width,
+            },
+            Player::P4 => Rect {
+                x: draw_width,
+                y: draw_height,
+                h: draw_height,
+                w: draw_width,
+            },
+        }
     }
 }
 
@@ -141,6 +186,10 @@ mod test {
             tank_direction: na::Vector2::from([-1., 0.]),
             tank_rotation: 0.,
             texture: None,
+            turret_texture: None,
+            turret_direction: na::Vector2::from([-1., 0.]),
+            turret_rotation: 0.,
+            player: Player::P1,
         }
     }
 }

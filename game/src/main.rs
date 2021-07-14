@@ -23,6 +23,6 @@ pub fn main() -> ggez::GameResult {
         .window_mode(window_state_mode());
 
     let (ctx, event_loop) = &mut cb.build()?;
-    let mut state = MainState::new(ctx)?;
+    let mut state = MainState::new(ctx, state::Player::P1)?;
     event::run(ctx, event_loop, &mut state)
 }
