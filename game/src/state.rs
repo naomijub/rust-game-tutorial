@@ -22,14 +22,21 @@ pub struct MainState {
 impl MainState {
     pub fn new(ctx: &mut Context, player: Player) -> ggez::GameResult<MainState> {
         let sc = screen_coordinates(ctx);
+        let tank_base = graphics::Image::new(ctx, "/TankBase.png")?;
+        let tank_dimensions = tank_base.dimensions();
+
         let tank = Tank {
             position: na::Point2::from([sc.w / 2., sc.h / 2.]),
             tank_direction: na::Vector2::from([-1., 0.]),
             tank_rotation: 0.,
-            texture: Some(graphics::Image::new(ctx, "/TankBase.png")?),
+            texture: Some(tank_base),
             turret_texture: Some(graphics::Image::new(ctx, "/TankTops.png")?),
             turret_direction: na::Vector2::from([-1., 0.]),
             turret_rotation: 0.,
+            turret_rotation_origin: na::Vector2::from([
+                tank_dimensions.w * 0.7,
+                tank_dimensions.h / 2.,
+            ]),
             player,
         };
         let s = MainState { tank };
