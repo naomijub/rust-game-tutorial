@@ -11,15 +11,15 @@ use ggez::timer::delta;
 use crate::state::Player;
 
 pub struct Tank {
-    pub(crate) position: na::Point2<f32>,
-    pub(crate) tank_direction: na::Vector2<f32>,
-    pub(crate) tank_rotation: f32,
-    pub(crate) texture: Option<graphics::Image>,
-    pub(crate) turret_texture: Option<graphics::Image>,
-    pub(crate) turret_direction: na::Vector2<f32>,
-    pub(crate) turret_rotation: f32,
-    pub(crate) turret_rotation_origin: na::Vector2<f32>,
-    pub(crate) player: Player,
+    pub position: na::Point2<f32>,
+    pub tank_direction: na::Vector2<f32>,
+    pub tank_rotation: f32,
+    pub texture: Option<graphics::Image>,
+    pub turret_texture: Option<graphics::Image>,
+    pub turret_direction: na::Vector2<f32>,
+    pub turret_rotation: f32,
+    pub turret_rotation_origin: na::Vector2<f32>,
+    pub player: Player,
 }
 
 impl event::EventHandler for Tank {
