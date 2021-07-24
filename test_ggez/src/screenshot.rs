@@ -37,12 +37,7 @@ pub fn get_screenshot() -> (usize, usize, Vec<u8>) {
         for y in 0..h {
             for x in 0..w {
                 let i = stride * y + 4 * x;
-                bitflipped.extend_from_slice(&[
-                    buffer[i + 2],
-                    buffer[i + 1],
-                    buffer[i],
-                    255,
-                ]);
+                bitflipped.extend_from_slice(&[buffer[i + 2], buffer[i + 1], buffer[i], 255]);
             }
         }
 

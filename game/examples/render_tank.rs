@@ -1,17 +1,18 @@
 use std::path;
 
-use ggez::{self, event, graphics::{self, screen_coordinates}};
 use ggez::conf::WindowSetup;
 use ggez::nalgebra as na;
+use ggez::{
+    self, event,
+    graphics::{self, screen_coordinates},
+};
 
 use game::{objects::Tank, state::window_state_mode};
 
 pub fn main() -> ggez::GameResult {
     let resources_dir = path::PathBuf::from("../resources");
-    let test_resources_dir = path::PathBuf::from("test_resources");
     let cb = ggez::ContextBuilder::new("tank_battle", "naomijub")
         .add_resource_path(resources_dir)
-        .add_resource_path(test_resources_dir)
         .window_setup(WindowSetup {
             title: "Tank Battle Ground".to_owned(),
             samples: ggez::conf::NumSamples::Zero,
@@ -23,7 +24,7 @@ pub fn main() -> ggez::GameResult {
 
     let (ctx, events_loop) = &mut cb.build()?;
     let sc = screen_coordinates(ctx);
-    
+
     let tank_base = graphics::Image::new(ctx, "/TankBase.png")?;
     let tank_dimensions = tank_base.dimensions();
 
