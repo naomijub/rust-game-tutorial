@@ -3,7 +3,7 @@ use std::io::ErrorKind::WouldBlock;
 use std::thread;
 use std::time::Duration;
 
-pub fn get_screenshot() -> Vec<u8> {
+pub fn get_screenshot() -> (usize, usize, Vec<u8>) {
     let one_second = Duration::new(1, 0);
     let one_frame = one_second / 60;
 
@@ -28,7 +28,7 @@ pub fn get_screenshot() -> Vec<u8> {
             }
         };
 
-        println!("Captured! Saving...");
+        println!("Captured!");
 
         // Flip the ARGB image into a BGRA image.
 
@@ -46,9 +46,8 @@ pub fn get_screenshot() -> Vec<u8> {
             }
         }
 
-        println!("Image saved to `screenshot.png`.");
         break;
     }
 
-    bitflipped
+    (w, h, bitflipped)
 }

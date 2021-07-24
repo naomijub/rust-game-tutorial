@@ -7,3 +7,7 @@ edition = "2018"
 
 [dependencies]
 ggez = "0.5"
+test_ggez = {path = "../test_ggez" }
+
+[[example]]
+name = "render_tank"
