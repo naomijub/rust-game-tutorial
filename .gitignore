@@ -1,2 +1,6 @@
 **/target/
 **/*.rs.bk
+.DS_Store
+**/.DS_Store
+**/test_resources/**/actual.png
+**/test_resources/**/diff.png
