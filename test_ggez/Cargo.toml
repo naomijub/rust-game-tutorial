@@ -1,11 +1,11 @@
 [package]
 name = "test_ggez"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2018"
 description = "Screenshot testing for GGEZ Rust games"
 readme = "README.md"
 keywords = ["screenshot", "test"]
-categories = ["development-tools::testing", "games", "testing"]
+categories = ["development-tools::testing", "games"]
 license = "Apache-2.0"
 repository = "https://github.com/naomijub/rust-game-tutorial/tree/main/test_ggez"
 
