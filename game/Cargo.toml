@@ -11,3 +11,9 @@ test_ggez = {path = "../test_ggez" }
 
 [[example]]
 name = "render_tank"
+
+[[example]]
+name = "move_tank"
+
+[[example]]
+name = "move_tank_turret"
