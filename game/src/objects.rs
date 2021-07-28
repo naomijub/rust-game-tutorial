@@ -51,7 +51,7 @@ impl event::EventHandler for Tank {
 }
 
 impl Tank {
-    fn movement(&mut self, keys: &HashSet<KeyCode>) {
+    pub fn movement(&mut self, keys: &HashSet<KeyCode>) {
         if keys.contains(&KeyCode::W) || keys.contains(&KeyCode::Up) {
             self.position = na::Point2::from([
                 self.position.x + self.tank_direction.x,
@@ -67,7 +67,7 @@ impl Tank {
         }
     }
 
-    fn rotation(&mut self, keys: &HashSet<KeyCode>, delta: f32) {
+    pub fn rotation(&mut self, keys: &HashSet<KeyCode>, delta: f32) {
         if keys.contains(&KeyCode::D) || keys.contains(&KeyCode::Right) {
             self.tank_rotation += delta;
             self.update_direction();
@@ -84,7 +84,7 @@ impl Tank {
         self.tank_direction = na::Vector2::from([-cos, -sin]);
     }
 
-    fn update_turret_direction(&mut self, mouse_position: na::Point2<f32>) {
+    pub fn update_turret_direction(&mut self, mouse_position: na::Point2<f32>) {
         let mouse = na::Vector2::from([mouse_position.x, mouse_position.y]);
         let origin = na::Vector2::from([
             self.position.x + self.turret_rotation_origin.x,
