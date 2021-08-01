@@ -7,6 +7,8 @@ edition = "2018"
 
 [dependencies]
 ggez = "0.5"
+
+[dev-dependencies]
 test_ggez = {path = "../test_ggez" }
 
 [[example]]
