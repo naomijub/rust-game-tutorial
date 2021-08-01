@@ -25,6 +25,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: install -libs
+      run: apt-get install libasound2-dev libudev-dev pkg-config
     - name: install-clippy
       run: rustup component add clippy
     - name: clippy
@@ -36,5 +38,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: install -libs
+      run: apt-get install libasound2-dev libudev-dev pkg-config
     - name: Run tests
       run: cd game/ && cargo test --verbose
