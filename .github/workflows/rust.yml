@@ -10,16 +10,16 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  fmt:
+  game_fmt:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
     - name: fmt
-      run: cargo fmt -- --check
+      run: cd game/ && cargo fmt -- --check
       
-  clippy:
+  game_clippy:
 
     runs-on: ubuntu-latest
 
@@ -28,13 +28,13 @@ jobs:
     - name: install-clippy
       run: rustup component add clippy
     - name: clippy
-      run: cargo clippy -- -W clippy::pedantic
+      run: cd game/ && cargo clippy -- -W clippy::pedantic
       
-  test:
+  game_test:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
     - name: Run tests
-      run: cargo test --verbose
+      run: cd game/ && cargo test --verbose
