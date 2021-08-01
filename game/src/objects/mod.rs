@@ -10,6 +10,8 @@ use ggez::timer::delta;
 
 use crate::state::Player;
 
+pub mod bullet;
+
 pub struct Tank {
     pub position: na::Point2<f32>,
     pub tank_direction: na::Vector2<f32>,
