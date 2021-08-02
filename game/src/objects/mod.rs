@@ -213,7 +213,7 @@ mod test {
     fn turret_rotation_direction() {
         let mut tank = tank();
         tank.update_turret_direction(na::Point2::from([500., 300.]));
-        assert_eq!(tank.turret_rotation, -3.1415925);
+        assert_eq!(tank.turret_rotation, -3.1415927);
         assert_eq!(tank.turret_direction, na::Vector2::from([1., 0.]));
 
         tank.update_turret_direction(na::Point2::from([100., 300.]));

@@ -39,6 +39,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: install -libs
-      run: sudo apt-get install libasound2-dev libudev-dev pkg-config libxcb-randr
+      run: sudo apt-get update && sudo apt-get install libasound2-dev libudev-dev pkg-config libxcb-randr0 libxcb-randr0-dev
     - name: Run tests
-      run: cd game/ && cargo test
+      run: cd game/ && cargo build && cargo test
