@@ -30,6 +30,7 @@ impl event::EventHandler for Tank {
         let keys = ggez::input::keyboard::pressed_keys(ctx);
         let delta = delta(ctx).as_secs_f32();
         let mouse_position = mouse::position(ctx);
+        let mouse_position = na::Point2::from([mouse_position.x + 75., mouse_position.y]);
         self.movement(keys);
         self.rotation(keys, delta);
         self.update_turret_direction(mouse_position.into());
