@@ -41,6 +41,7 @@ pub fn main() -> ggez::GameResult {
             tank_dimensions.h / 2.,
         ]),
         player: game::state::Player::P1,
+        turret_width: tank_dimensions.w * 0.7,
     };
 
     tank.update_turret_direction(Point2::from_slice(&[300., 400.]));
