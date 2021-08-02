@@ -41,6 +41,7 @@ pub fn main() -> ggez::GameResult {
             tank_dimensions.h / 2.,
         ]),
         player: game::state::Player::P1,
+        turret_width: tank_dimensions.w * 0.7,
     };
 
     let mut test_state = test_ggez::TestState::new(tank, "render_tank");

@@ -22,6 +22,7 @@ pub struct Tank {
     pub turret_rotation: f32,
     pub turret_rotation_origin: na::Vector2<f32>,
     pub player: Player,
+    pub turret_width: f32,
 }
 
 impl event::EventHandler for Tank {
@@ -130,6 +131,15 @@ impl Tank {
             },
         }
     }
+
+    pub fn get_turret_end(&self) -> (f32, f32) {
+        let origin = na::Point2::from(self.position);
+        let length = self.turret_width;
+        let (sin, cos) =  self.turret_rotation.sin_cos();
+        let (j, i) = (length * sin, length * cos);
+
+        (origin.x - i, origin.y - j)
+    }
 }
 
 #[cfg(test)]
@@ -225,6 +235,14 @@ mod test {
         );
     }
 
+    #[test]
+    fn turrets_end() {
+        let tank = tank();
+        let point =  tank.get_turret_end();
+
+        assert_eq!(point, (395., 300.))
+    }
+
     fn tank() -> Tank {
         Tank {
             position: na::Point2::from([400., 300.]),
@@ -236,6 +254,7 @@ mod test {
             turret_rotation_origin: na::Vector2::from([0., 0.]),
             turret_rotation: 0.,
             player: Player::P1,
+            turret_width: 5.
         }
     }
 }
