@@ -2278,6 +2278,8 @@ dependencies = [
 [[package]]
 name = "test_ggez"
 version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2acd8c3f2b93e44722b16416ab5dbbaff2c3fade86cb809e25d613652b106769"
 dependencies = [
  "ggez",
  "image 0.23.14",
