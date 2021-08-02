@@ -45,7 +45,7 @@ impl MainState {
                 tank_dimensions.h / 2.,
             ]),
             player,
-            turret_width
+            turret_width,
         };
 
         let s = MainState {
@@ -168,7 +168,10 @@ mod tests {
 
         main_state.fire_bullet(keys, true);
 
-        assert_eq!(main_state.bullet.unwrap().position, na::Point2::from([299.22873, 304.94016]))
+        assert_eq!(
+            main_state.bullet.unwrap().position,
+            na::Point2::from([299.22873, 304.94016])
+        )
     }
 
     fn main() -> MainState {
@@ -183,7 +186,7 @@ mod tests {
                 turret_rotation: 30.,
                 turret_rotation_origin: na::Vector2::from([1., 1.]),
                 player: crate::state::Player::P1,
-                turret_width: 5.
+                turret_width: 5.,
             },
             bullet: None,
             coordinate: coord(),

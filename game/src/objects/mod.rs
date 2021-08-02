@@ -135,7 +135,7 @@ impl Tank {
     pub fn get_turret_end(&self) -> (f32, f32) {
         let origin = na::Point2::from(self.position);
         let length = self.turret_width;
-        let (sin, cos) =  self.turret_rotation.sin_cos();
+        let (sin, cos) = self.turret_rotation.sin_cos();
         let (j, i) = (length * sin, length * cos);
 
         (origin.x - i, origin.y - j)
@@ -238,7 +238,7 @@ mod test {
     #[test]
     fn turrets_end() {
         let tank = tank();
-        let point =  tank.get_turret_end();
+        let point = tank.get_turret_end();
 
         assert_eq!(point, (395., 300.))
     }
@@ -254,7 +254,7 @@ mod test {
             turret_rotation_origin: na::Vector2::from([0., 0.]),
             turret_rotation: 0.,
             player: Player::P1,
-            turret_width: 5.
+            turret_width: 5.,
         }
     }
 }

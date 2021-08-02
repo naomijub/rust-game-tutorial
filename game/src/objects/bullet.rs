@@ -122,7 +122,7 @@ mod tests {
                 turret_rotation: 30.,
                 turret_rotation_origin: na::Vector2::from([1., 1.]),
                 player: crate::state::Player::P1,
-                turret_width: 0.
+                turret_width: 0.,
             },
             bullet: Some(bullet()),
             coordinate: coord(),
