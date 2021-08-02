@@ -41,4 +41,4 @@ jobs:
     - name: install -libs
       run: sudo apt-get update && sudo apt-get install libasound2-dev libudev-dev pkg-config libxcb-randr0
     - name: Run tests
-      run: cd game/ && cargo test
+      run: cd game/ && cargo build && cargo test
