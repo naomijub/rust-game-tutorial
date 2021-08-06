@@ -3,6 +3,7 @@ use std::path;
 
 use ggez::conf::WindowSetup;
 use ggez::event::KeyCode;
+use ggez::graphics::Rect;
 use ggez::nalgebra as na;
 use ggez::{
     self, event,
@@ -45,11 +46,15 @@ pub fn main() -> ggez::GameResult {
         player: game::state::Player::P1,
         turret_width: tank_dimensions.w * 0.7,
     };
+    let dim = Rect::new(0., 0., 10., 10.);
 
     tank.movement(
         &vec![KeyCode::W, KeyCode::P]
             .into_iter()
             .collect::<HashSet<KeyCode>>(),
+        sc,
+        dim,
+        &Rect::new(0., 0., 0., 0.),
     );
     tank.rotation(
         &vec![KeyCode::Up, KeyCode::D]
@@ -61,6 +66,9 @@ pub fn main() -> ggez::GameResult {
         &vec![KeyCode::Up, KeyCode::D]
             .into_iter()
             .collect::<HashSet<KeyCode>>(),
+        sc,
+        dim,
+        &Rect::new(0., 0., 0., 0.),
     );
     tank.rotation(
         &vec![KeyCode::Up, KeyCode::Right]
@@ -68,8 +76,18 @@ pub fn main() -> ggez::GameResult {
             .collect::<HashSet<KeyCode>>(),
         0.3,
     );
-    tank.movement(&vec![KeyCode::W].into_iter().collect::<HashSet<KeyCode>>());
-    tank.movement(&vec![KeyCode::S].into_iter().collect::<HashSet<KeyCode>>());
+    tank.movement(
+        &vec![KeyCode::W].into_iter().collect::<HashSet<KeyCode>>(),
+        sc,
+        dim,
+        &Rect::new(0., 0., 0., 0.),
+    );
+    tank.movement(
+        &vec![KeyCode::S].into_iter().collect::<HashSet<KeyCode>>(),
+        sc,
+        dim,
+        &Rect::new(0., 0., 0., 0.),
+    );
     tank.rotation(
         &vec![KeyCode::Up, KeyCode::Left]
             .into_iter()

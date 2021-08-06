@@ -20,6 +20,7 @@ pub struct Bullet {
 impl event::EventHandler for Bullet {
     fn update(&mut self, _: &mut ggez::Context) -> ggez::GameResult {
         self.movement();
+        // send to server
         Ok(())
     }
 
@@ -126,6 +127,18 @@ mod tests {
             },
             bullet: Some(bullet()),
             coordinate: coord(),
+            enemy: Tank {
+                position: na::Point2::from([100., 100.]),
+                tank_direction: na::Vector2::from([1., 1.]),
+                tank_rotation: 30.,
+                texture: None,
+                turret_texture: None,
+                turret_direction: na::Vector2::from([1., 1.]),
+                turret_rotation: 30.,
+                turret_rotation_origin: na::Vector2::from([1., 1.]),
+                player: crate::state::Player::P2,
+                turret_width: 0.,
+            },
         }
     }
 
