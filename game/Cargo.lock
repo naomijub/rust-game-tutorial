@@ -566,6 +566,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "float_eq"
+version = "0.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "aa334a728fecaf0922f5735ede5f27c08fefc7c4e5b04c5efe02a3861b512f2e"
+
+[[package]]
 name = "fnv"
 version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -596,6 +602,7 @@ checksum = "a06f77d526c1a601b7c4cdd98f54b5eaabffc14d5f2f0296febdc7f357c6d3ba"
 name = "game"
 version = "0.1.0"
 dependencies = [
+ "float_eq",
  "ggez",
  "test_ggez",
 ]

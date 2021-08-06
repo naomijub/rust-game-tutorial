@@ -12,6 +12,7 @@ use crate::objects::bullet::remove_bullet_if_outside_game_scren;
 use crate::objects::bullet::Bullet;
 use crate::objects::Tank;
 
+#[derive(PartialEq)]
 pub enum Player {
     P1,
     P2,
@@ -20,7 +21,8 @@ pub enum Player {
 }
 
 pub struct MainState {
-    pub(crate) tank: Tank,
+    pub tank: Tank,
+    pub enemy: Tank,
     pub bullet: Option<Bullet>,
     pub coordinate: Rect,
 }
@@ -36,7 +38,7 @@ impl MainState {
             position: na::Point2::from([sc.w / 2., sc.h / 2.]),
             tank_direction: na::Vector2::from([-1., 0.]),
             tank_rotation: 0.,
-            texture: Some(tank_base),
+            texture: Some(tank_base.clone()),
             turret_texture: Some(graphics::Image::new(ctx, "/TankTops.png")?),
             turret_direction: na::Vector2::from([-1., 0.]),
             turret_rotation: 0.,
@@ -48,10 +50,27 @@ impl MainState {
             turret_width,
         };
 
+        let tank2 = Tank {
+            position: na::Point2::from([sc.w - 100., sc.h - 100.]),
+            tank_direction: na::Vector2::from([-1., 0.]),
+            tank_rotation: 0.,
+            texture: Some(tank_base),
+            turret_texture: Some(graphics::Image::new(ctx, "/TankTops.png")?),
+            turret_direction: na::Vector2::from([-1., 0.]),
+            turret_rotation: 0.,
+            turret_rotation_origin: na::Vector2::from([
+                tank_dimensions.w * 0.7,
+                tank_dimensions.h / 2.,
+            ]),
+            player: Player::P2,
+            turret_width,
+        };
+
         let s = MainState {
             tank,
             coordinate: sc,
             bullet: None,
+            enemy: tank2,
         };
         Ok(s)
     }
@@ -59,7 +78,8 @@ impl MainState {
 
 impl event::EventHandler for MainState {
     fn update(&mut self, ctx: &mut ggez::Context) -> ggez::GameResult {
-        self.tank.update(ctx)?;
+        self.tank.update_(ctx, &self.enemy)?;
+        self.enemy.update(ctx)?;
         if let Some(bullet) = &mut self.bullet {
             let coord = self.coordinate.clone();
             bullet.update(ctx)?;
@@ -76,6 +96,7 @@ impl event::EventHandler for MainState {
     fn draw(&mut self, ctx: &mut ggez::Context) -> ggez::GameResult {
         graphics::clear(ctx, [0.83, 0.69, 0.51, 1.0].into());
         self.tank.draw(ctx)?;
+        self.enemy.draw(ctx)?;
         if let Some(bullet) = &mut self.bullet {
             bullet.draw(ctx)?;
         }
@@ -190,6 +211,18 @@ mod tests {
             },
             bullet: None,
             coordinate: coord(),
+            enemy: Tank {
+                position: na::Point2::from([100., 100.]),
+                tank_direction: na::Vector2::from([1., 1.]),
+                tank_rotation: 30.,
+                texture: None,
+                turret_texture: None,
+                turret_direction: na::Vector2::from([1., 1.]),
+                turret_rotation: 30.,
+                turret_rotation_origin: na::Vector2::from([1., 1.]),
+                player: crate::state::Player::P2,
+                turret_width: 5.,
+            },
         }
     }
 
