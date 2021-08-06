@@ -10,6 +10,7 @@ ggez = "0.5"
 
 [dev-dependencies]
 test_ggez = "*"
+float_eq = "*"
 
 [[example]]
 name = "render_tank"
